@@ -3,10 +3,17 @@ import * as vscode from "vscode";
 export enum ProgressMsgType {
 	Message, Error, Exit
 }
+export enum HttpMsgType {
+	Message, Error, Exit, Url
+}
 export interface ChildProcessExt extends cp.ChildProcess {
 	isDestroy?: boolean;
 }
-export type OutPutFun = ((ProgressMsgType: number, msg: string) => void) | undefined
+export type OutPutFun = ((progressMsgType: ProgressMsgType, msg: string) => void) | undefined
+export type HttpOutPutFun = ((httpMsgType: HttpMsgType, msg: string) => void) | undefined
+export enum LogLevel {
+	DEBUG, LOG, WARN, ERROR
+}
 export type EgretRes = {
 	url: string;
 	type: string;
@@ -35,6 +42,11 @@ export enum Platform {
 export enum OpenEgretServerType {
 	auto = "auto",
 	alert = "alert"
+}
+export enum EgretCompileType {
+	auto = "auto",
+	legacy = "legacy",
+	webpack = "webpack"
 }
 export enum EgretHostType {
 	localhost = "127.0.0.1",
@@ -70,8 +82,10 @@ export interface ConfigObj extends vscode.WorkspaceConfiguration {
 	openEgretServer: OpenEgretServerType,
 	/**Egret服务器http地址的格式*/
 	hostType: EgretHostType;
-	/**Egret服务器http地址的格式*/
+	/**Egret调试的浏览器*/
 	debugBrowser: DebugBrowserType;
 	/**Egret服务器首选端口*/
-	port:number;
+	port: number;
+	/**Egret的编译代码方式*/
+	egretCompileType: EgretCompileType;
 }

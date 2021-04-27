@@ -2,7 +2,7 @@
 	"name": "egret-helper",
 	"displayName": "Egret Helper",
 	"description": "egret工具 支持调试，编译，管理资源，发布，创建",
-	"version": "2.0.42",
+	"version": "3.0.2",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
@@ -231,10 +231,25 @@
 						"Microsoft Edge浏览器"
 					]
 				},
-				"egret-helper.port":{
+				"egret-helper.port": {
 					"type": "number",
 					"description": "Egret服务器首选端口",
 					"default": 7000
+				},
+				"egret-helper.egretCompileType": {
+					"type": "string",
+					"description": "Egret的编译代码方式",
+					"default": "auto",
+					"enum": [
+						"auto",
+						"legacy",
+						"webpack"
+					],
+					"enumDescriptions": [
+						"根据项目下scripts/config.ts文件中是否含有WebpackBundlePlugin判断(build命令中)，如果这种判断有问题可以手动选择其他的编译方式",
+						"传统编译模式(适用版本一般在5.3.6以下)",
+						"webpack编译(适用版本一般在5.3.6和5.3.6以上)"
+					]
 				}
 			}
 		},
@@ -290,7 +305,7 @@
 		"glob": "^7.1.6",
 		"mocha": "^7.0.1",
 		"typescript": "^4.0.2",
-		"vsce": "^1.79.5"
+		"vsce": "^1.87.1"
 	},
 	"dependencies": {
 		"jju": "^1.4.0",
